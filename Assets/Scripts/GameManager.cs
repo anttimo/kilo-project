@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+
+    public GameObject player1;
+    public GameObject player2;
+    
     private int level = 1;
 
     //Awake is always called before any Start functions
@@ -29,5 +33,10 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
 
+    }
+
+    public static void Win  (int winner) {
+        Debug.Log(winner);
+        // TODO: Reset player locations to original places
     }
 }

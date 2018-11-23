@@ -34,4 +34,10 @@ public class CharacterControl : MonoBehaviour {
         if (playerNumber == 2) rotation = 0;
         Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler( new Vector3(0, 0, rotation) ));
     }
+
+    void OnTriggerEnter2D (Collider2D col) {
+        if (col.gameObject.name == "CenterLine") {
+            GameManager.Win(playerNumber);
+        }
+    }
 }
