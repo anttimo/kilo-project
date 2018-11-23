@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject player1;
     public GameObject player2;
+
+    static Vector3 player1Origin;
+    static Vector3 player2Origin;
     
     private int level = 1;
 
@@ -32,11 +35,18 @@ public class GameManager : MonoBehaviour
     //Initializes the game for each level.
     void InitGame()
     {
+        player1Origin = player1.transform.position;
+        player2Origin = player2.transform.position;
+    }
 
+    void ResetPlayers () {
+        player1.transform.position = player1Origin;
+        player2.transform.position = player2Origin;
     }
 
     public static void Win  (int winner) {
         Debug.Log(winner);
-        // TODO: Reset player locations to original places
+        // TODO: Reset player locations to original places, this doesn't work because some static stuff, needs fixin
+        //ResetPlayers();
     }
 }

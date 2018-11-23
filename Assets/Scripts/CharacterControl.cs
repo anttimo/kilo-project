@@ -10,8 +10,11 @@ public class CharacterControl : MonoBehaviour {
     public Transform firepoint;
     public GameObject bulletPrefab;
 
+    public static Vector3 originLocation;
+
     // Use this for initialization
     void Start () {
+        originLocation = transform.position;
     }
 
 	// Update is called once per frame
@@ -38,6 +41,10 @@ public class CharacterControl : MonoBehaviour {
     void OnTriggerEnter2D (Collider2D col) {
         if (col.gameObject.name == "CenterLine") {
             GameManager.Win(playerNumber);
+        }
+
+        if (col.gameObject.tag == "Bullet") {
+            Destroy(col.gameObject);
         }
     }
 }
