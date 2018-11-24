@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float speed = 0.5f;
+    public float speed = 1;
+    public bool frozen = false;
+
     void Start()
     {
 
@@ -13,12 +15,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.paused)
+        if (GameManager.instance.paused || frozen)
         {
             return;
         }
-
-        transform.position += (getTargetPlayer().transform.position - transform.position) * speed * Time.deltaTime;
+        var dir = (getTargetPlayer().transform.position
+            - transform.position).normalized
+            + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
     private GameObject getTargetPlayer()
@@ -39,6 +43,33 @@ public class Enemy : MonoBehaviour
         return GameManager.instance.player1;
     }
 
+    IEnumerator SwapAndClone()
+    {
+
+        frozen = true;
+        transform.position = new Vector3(
+                getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
+                Random.Range(-10f, 10f),
+                transform.position.z);
+
+        speed *= 1.5f;
+        speed = Mathf.Clamp(speed, 1, 4);
+
+        if (transform.localScale.x > 0.5f)
+        {
+            transform.localScale *= 0.6f;
+            GetComponent<Rigidbody2D>().mass *= 0.6f;
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
+            frozen = false;
+            Instantiate(gameObject);
+        }
+        else
+        {
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
+            frozen = false;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet")
@@ -46,30 +77,18 @@ public class Enemy : MonoBehaviour
             var initialBulletX = col.GetComponent<Bullet>().initialPosition.x;
             bool bulletHasCrossed = initialBulletX * col.gameObject.transform.position.x < 0;
 
-            //bool destroy = isPlayer1 ? getTargetPlayer() == GameManager.instance.player1 : getTargetPlayer() == GameManager.instance.player2;
             if (bulletHasCrossed)
             {
                 return;
             }
 
             Destroy(col.gameObject);
+            StartCoroutine(SwapAndClone());
+        }
 
-            transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.2f, 0.4f),
-                getOtherPlayer().transform.position.y * Random.Range(0.5f, 1.5f),
-                transform.position.z);
-
-            speed *= 1.5f;
-            speed = Mathf.Clamp(speed, 0.5f, 1f);
-
-            if (transform.localScale.x > 0.4f)
-            {
-                transform.localScale *= 0.8f;
-                GetComponent<Rigidbody2D>().mass *= 0.8f;
-                Instantiate(gameObject);
-
-            }
-
+        if (col.gameObject.tag == "Player")
+        {
+            StartCoroutine(SwapAndClone());
         }
     }
 }
