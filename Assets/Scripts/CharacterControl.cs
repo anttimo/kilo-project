@@ -13,6 +13,8 @@ public class CharacterControl : MonoBehaviour
 
     public static Vector3 originLocation;
 
+    public SpriteRenderer spriteRenderer;
+
     // Use this for initialization
     void Start()
     {
@@ -27,6 +29,11 @@ public class CharacterControl : MonoBehaviour
 
         transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
         //GetComponent<Rigidbody2D>().AddForce( new Vector2(moveX * speed, moveY * speed) );
+
+        if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
 
         if (Input.GetButtonDown("Fire" + playerNumber))
         {
