@@ -53,28 +53,22 @@ public class Enemy : MonoBehaviour
             }
 
             Destroy(col.gameObject);
-            transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * 0.8f,
-                getOtherPlayer().transform.position.y,
-                transform.position.z);
-            // TODO: Take player from GameManager and switch the target to it
 
             transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.6f, 0.8f),
+                getOtherPlayer().transform.position.x * Random.Range(0.2f, 0.4f),
                 getOtherPlayer().transform.position.y * Random.Range(0.5f, 1.5f),
                 transform.position.z);
 
-            var clone = Instantiate(gameObject);
+            speed *= 2;
+            speed = Mathf.Clamp(speed, 0.5f, 2f);
+
             if (transform.localScale.x > 0.2f)
             {
-                clone.transform.localScale = clone.transform.localScale * 0.8f;
-                transform.localScale *= 0.5f;
+                transform.localScale *= 0.8f;
+                GetComponent<Rigidbody2D>().mass *= 0.8f;
             }
 
-            var enemy = clone.GetComponent<Enemy>();
-            enemy.speed *= 2;
-            enemy.speed = Mathf.Clamp(enemy.speed, 0.5f, 2f);
-            // TODO: Take player from GameManager and switch the target to it
+            Instantiate(gameObject);
         }
     }
 }
