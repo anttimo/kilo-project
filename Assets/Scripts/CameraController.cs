@@ -35,10 +35,15 @@ public class CameraController : MonoBehaviour
         StartCoroutine(Wait());
     }
 
+    public void MoveCamera()
+    {
+        moveCameras = true;
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSecondsRealtime(2);
-        moveCameras = true;
+        MoveCamera();
     }
 
     // Update is called once per frame
