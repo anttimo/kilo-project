@@ -59,16 +59,17 @@ public class Enemy : MonoBehaviour
                 getOtherPlayer().transform.position.y * Random.Range(0.5f, 1.5f),
                 transform.position.z);
 
-            speed *= 2;
-            speed = Mathf.Clamp(speed, 0.5f, 2f);
+            speed *= 1.5f;
+            speed = Mathf.Clamp(speed, 0.5f, 1.5f);
 
             if (transform.localScale.x > 0.2f)
             {
                 transform.localScale *= 0.8f;
                 GetComponent<Rigidbody2D>().mass *= 0.8f;
+                Instantiate(gameObject);
+
             }
 
-            Instantiate(gameObject);
         }
     }
 }

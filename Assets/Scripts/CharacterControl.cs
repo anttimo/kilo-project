@@ -25,6 +25,9 @@ public class CharacterControl : MonoBehaviour
 
     private float nextShockwave;
     public float shockwaveDelay = 3f;
+    public Rigidbody2D rb;
+
+    public bool knockingBack = false;
 
     public float forcefieldDestroy;
 
@@ -41,8 +44,12 @@ public class CharacterControl : MonoBehaviour
         fireDelay = 0.5f;
         nextFire = 0f;
         nextShockwave = 0f;
+<<<<<<< HEAD
         forcefieldDestroy = 0f;
         nextForcefield = 0f;
+=======
+        rb = GetComponent<Rigidbody2D>();
+>>>>>>> 1bab4879194858c03a9fd2abad30f8e1f593cbdb
     }
 
     // Update is called once per frame
@@ -56,8 +63,10 @@ public class CharacterControl : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
-        transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
-        //GetComponent<Rigidbody2D>().AddForce( new Vector2(moveX * speed, moveY * speed) );
+        if (!knockingBack)
+        {
+            transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
+        }
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
@@ -70,7 +79,12 @@ public class CharacterControl : MonoBehaviour
             nextFire = Time.time + fireDelay;
         }
 
+<<<<<<< HEAD
         if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2")) {
+=======
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire2" + playerNumber))
+        {
+>>>>>>> 1bab4879194858c03a9fd2abad30f8e1f593cbdb
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
         }
@@ -91,7 +105,8 @@ public class CharacterControl : MonoBehaviour
         Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
-    void Shockwave () {
+    void Shockwave()
+    {
         int rotation = 180;
         if (playerNumber == 2) rotation = 0;
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
@@ -104,7 +119,7 @@ public class CharacterControl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("On trigger enter " + col.gameObject.tag);
+
         if (Time.time <= forcefieldDestroy) return;
         if (col.gameObject.tag == "Goal")
         {
@@ -112,18 +127,32 @@ public class CharacterControl : MonoBehaviour
         }
         else if (col.gameObject.tag == "Monster")
         {
-            // Destroy(col.gameObject);
-            transform.position = new Vector2(
-                transform.position.x * 1.05f,
-                transform.position.y
-            );
+            StartCoroutine(Knockback());
         }
-        if (col.gameObject.tag == "Bullet") {
-            transform.position = new Vector2(
-                transform.position.x * 1.05f,
-                transform.position.y
-            );
+        if (col.gameObject.tag == "Bullet")
+        {
+            StartCoroutine(Knockback());
             Destroy(col.gameObject);
         }
+    }
+
+    IEnumerator Knockback()
+    {
+        if (knockingBack)
+        {
+            Debug.Log("Skip KB");
+            yield break;
+        }
+        Debug.Log("Start KB");
+        knockingBack = true;
+        rb.AddForce(
+            new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 15, 0),
+            ForceMode2D.Impulse
+        );
+        yield return new WaitForSeconds(0.25f);
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        knockingBack = false;
+        Debug.Log("Stop KB");
     }
 }
