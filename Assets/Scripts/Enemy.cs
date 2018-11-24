@@ -24,13 +24,22 @@ public class Enemy : MonoBehaviour
         return GameManager.instance.player2;
     }
 
+    private GameObject getOtherPlayer()
+    {
+        if (getTargetPlayer() == GameManager.instance.player1)
+        {
+            return GameManager.instance.player2;
+        }
+        return GameManager.instance.player1;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Bullet")
         {
             Destroy(col.gameObject);
             transform.position = new Vector3(
-                -transform.position.x,
+                getOtherPlayer().transform.position.x * 0.8f,
                 transform.position.y,
                 transform.position.z);
             // TODO: Take player from GameManager and switch the target to it
