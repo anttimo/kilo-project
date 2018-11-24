@@ -39,8 +39,8 @@ public class Enemy : MonoBehaviour
         {
             Destroy(col.gameObject);
             transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * 0.8f,
-                getOtherPlayer().transform.position.y,
+                getOtherPlayer().transform.position.x * Random.Range(0.7f, 0.9f),
+                getOtherPlayer().transform.position.y * Random.Range(0.8f, 1.2f),
                 transform.position.z);
             // TODO: Take player from GameManager and switch the target to it
         }
