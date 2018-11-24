@@ -22,10 +22,15 @@ public class CharacterControl : MonoBehaviour
     private float nextShockwave;
     public float shockwaveDelay = 3f;
     public Rigidbody2D rb;
-
     public bool knockingBack = false;
-
+    private float maxY;
     // Use this for initialization
+
+    void Awake()
+    {
+        maxY = Camera.main.orthographicSize * 2.0f;
+    }
+
     void Start()
     {
         originLocation = transform.position;
@@ -46,10 +51,18 @@ public class CharacterControl : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
+
         if (!knockingBack)
         {
             transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
         }
+
+        var yPosition = Mathf.Clamp(transform.position.y, -1 * maxY / 2, maxY / 2);
+        Debug.Log("asdfasdfasdf " + maxY + "   " + Camera.main.orthographicSize);
+        transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
+
+        //GetComponent<Rigidbody2D>().AddForce( new Vector2(moveX * speed, moveY * speed) );
+
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
