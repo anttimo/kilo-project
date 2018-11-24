@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             Destroy(col.gameObject);
             transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * 0.8f,
-                transform.position.y,
+                getOtherPlayer().transform.position.y,
                 transform.position.z);
             // TODO: Take player from GameManager and switch the target to it
         }
