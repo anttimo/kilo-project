@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
             Destroy(col.gameObject);
             frozen = true;
             StartCoroutine(SwapAndClone());
+            SoundManager.PlaySound("enemyDie");
         }
 
         if (col.gameObject.tag == "Player")

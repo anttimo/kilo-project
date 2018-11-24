@@ -37,8 +37,6 @@ public class CharacterControl : MonoBehaviour
 
     public float forcefieldDelay = 8f;
 
-    public AudioSource shoot;
-
     // Use this for initialization
 
     void Awake()
