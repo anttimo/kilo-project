@@ -13,10 +13,16 @@ public class CharacterControl : MonoBehaviour
 
     public static Vector3 originLocation;
 
+    public SpriteRenderer spriteRenderer;
+    private float nextFire;
+    public float fireDelay;
+
     // Use this for initialization
     void Start()
     {
         originLocation = transform.position;
+        fireDelay = 0.5f;
+        nextFire = 0f;
     }
 
     // Update is called once per frame
@@ -28,9 +34,15 @@ public class CharacterControl : MonoBehaviour
         transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
         //GetComponent<Rigidbody2D>().AddForce( new Vector2(moveX * speed, moveY * speed) );
 
-        if (Input.GetButtonDown("Fire" + playerNumber))
+        if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
+
+        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber))
         {
             Shoot();
+            nextFire = Time.time + fireDelay;
         }
     }
 

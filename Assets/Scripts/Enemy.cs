@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.position += (getTargetPlayer().transform.position - transform.position) * 0.1f * Time.deltaTime;
+        transform.position += (getTargetPlayer().transform.position - transform.position) * 0.5f * Time.deltaTime;
     }
 
     private GameObject getTargetPlayer()
