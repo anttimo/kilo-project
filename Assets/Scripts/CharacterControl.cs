@@ -76,16 +76,19 @@ public class CharacterControl : MonoBehaviour
             nextFire = Time.time + fireDelay;
         }
 
-        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2")) {
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2"))
+        {
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
         }
 
-        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3")) {
+        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3"))
+        {
             Forcefield();
             nextForcefield = Time.time + forcefieldDelay;
         }
-        if (Time.time > forcefieldDestroy) {
+        if (Time.time > forcefieldDestroy)
+        {
             Destroy(forcefield);
         }
     }
@@ -104,7 +107,8 @@ public class CharacterControl : MonoBehaviour
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
-    void Forcefield () {
+    void Forcefield()
+    {
         forcefield = Instantiate(forcefieldPrefab, transform);
         forcefieldDestroy = Time.time + forcefieldTime;
     }
@@ -120,6 +124,10 @@ public class CharacterControl : MonoBehaviour
         else if (col.gameObject.tag == "Monster")
         {
             StartCoroutine(Knockback());
+            if (knockingBack)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.tag == "Bullet")
         {
