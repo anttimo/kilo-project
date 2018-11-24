@@ -50,7 +50,10 @@ public class Enemy : MonoBehaviour
 
     IEnumerator SwapAndClone()
     {
-
+        if (frozen)
+        {
+            yield break;
+        }
         frozen = true;
         transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
@@ -62,7 +65,7 @@ public class Enemy : MonoBehaviour
 
         if (transform.localScale.x > 0.5f)
         {
-            transform.localScale *= 0.6f;
+            transform.localScale *= 0.8f;
             GetComponent<Rigidbody2D>().mass *= 0.6f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
