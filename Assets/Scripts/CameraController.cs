@@ -8,14 +8,15 @@ public class CameraController : MonoBehaviour
     private Camera targetCamera;
 
     public bool isLeftCamera = true;
-    public float cameraSpeed = 10f;
+    public float cameraSpeed = 12f;
     public GameObject arena;
-    private float arenaWidth = 10f;
+    private float arenaWidth = 20f;
 
     public GameObject player;
     private Vector3 offset;
 
     private bool isReady = false;
+    private bool moveCameras = false;
     void Awake()
     {
         Debug.Log(arenaWidth);
@@ -30,9 +31,25 @@ public class CameraController : MonoBehaviour
         targetCamera.transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
 
+    void Start()
+    {
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        moveCameras = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!moveCameras)
+        {
+            return;
+        }
+
         if (!isReady)
         {
             var offsetX = transform.position.x + Mathf.Sign(transform.position.x) * cameraSpeed / 40;
