@@ -19,9 +19,10 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.x * initialPosition.x < 0)
+        Debug.Log(Mathf.Abs(transform.position.x));
+        if (Mathf.Abs(transform.position.x) > CameraController.arenaWidth * 2)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
