@@ -57,7 +57,12 @@ public class CharacterControl : MonoBehaviour
         }
         else if (col.gameObject.tag == "Monster")
         {
-            Destroy(col.gameObject);
+            // Destroy(col.gameObject);
+            transform.position = new Vector3(
+                transform.position.x * 1.05f,
+                transform.position.y,
+                transform.position.z
+            );
         }
         // if (col.gameObject.tag == "Bullet") {
         //     Destroy(col.gameObject);
