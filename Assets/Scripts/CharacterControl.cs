@@ -46,7 +46,10 @@ public class CharacterControl : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
-        transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
+        if (!knockingBack)
+        {
+            transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
+        }
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
@@ -110,7 +113,7 @@ public class CharacterControl : MonoBehaviour
             new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 5, 0),
             ForceMode2D.Impulse
         );
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
         knockingBack = false;
