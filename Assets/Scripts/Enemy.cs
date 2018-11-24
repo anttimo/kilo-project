@@ -60,9 +60,9 @@ public class Enemy : MonoBehaviour
                 transform.position.z);
 
             speed *= 1.5f;
-            speed = Mathf.Clamp(speed, 0.5f, 1.5f);
+            speed = Mathf.Clamp(speed, 0.5f, 1f);
 
-            if (transform.localScale.x > 0.2f)
+            if (transform.localScale.x > 0.4f)
             {
                 transform.localScale *= 0.8f;
                 GetComponent<Rigidbody2D>().mass *= 0.8f;

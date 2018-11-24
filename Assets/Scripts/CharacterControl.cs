@@ -26,8 +26,9 @@ public class CharacterControl : MonoBehaviour
     private float nextShockwave;
     public float shockwaveDelay = 3f;
     public Rigidbody2D rb;
-
     public bool knockingBack = false;
+
+    private float maxY;
 
     public float forcefieldDestroy;
 
@@ -38,6 +39,12 @@ public class CharacterControl : MonoBehaviour
     public float forcefieldDelay = 8f;
 
     // Use this for initialization
+
+    void Awake()
+    {
+        maxY = Camera.main.orthographicSize * 2.0f;
+    }
+
     void Start()
     {
         originLocation = transform.position;
@@ -60,10 +67,14 @@ public class CharacterControl : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
+
         if (!knockingBack)
         {
             transform.Translate(new Vector2(moveX * Time.deltaTime * speed, moveY * Time.deltaTime * speed));
         }
+
+        var yPosition = Mathf.Clamp(transform.position.y, -1 * maxY / 2, maxY / 2);
+        transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
@@ -76,16 +87,19 @@ public class CharacterControl : MonoBehaviour
             nextFire = Time.time + fireDelay;
         }
 
-        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2")) {
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2"))
+        {
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
         }
 
-        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3")) {
+        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3"))
+        {
             Forcefield();
             nextForcefield = Time.time + forcefieldDelay;
         }
-        if (Time.time > forcefieldDestroy) {
+        if (Time.time > forcefieldDestroy)
+        {
             Destroy(forcefield);
         }
     }
@@ -104,7 +118,8 @@ public class CharacterControl : MonoBehaviour
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
-    void Forcefield () {
+    void Forcefield()
+    {
         forcefield = Instantiate(forcefieldPrefab, transform);
         forcefieldDestroy = Time.time + forcefieldTime;
     }
@@ -120,6 +135,10 @@ public class CharacterControl : MonoBehaviour
         else if (col.gameObject.tag == "Monster")
         {
             StartCoroutine(Knockback());
+            if (knockingBack)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.tag == "Bullet")
         {
