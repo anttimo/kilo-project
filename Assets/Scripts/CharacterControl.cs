@@ -13,6 +13,10 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject shockwavePrefab;
 
+    public GameObject forcefieldPrefab;
+
+    private GameObject forcefield;
+
     public static Vector3 originLocation;
 
     public SpriteRenderer spriteRenderer;
@@ -22,6 +26,14 @@ public class CharacterControl : MonoBehaviour
     private float nextShockwave;
     public float shockwaveDelay = 3f;
 
+    public float forcefieldDestroy;
+
+    public float forcefieldTime = 2f;
+
+    public float nextForcefield;
+
+    public float forcefieldDelay = 8f;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +41,8 @@ public class CharacterControl : MonoBehaviour
         fireDelay = 0.5f;
         nextFire = 0f;
         nextShockwave = 0f;
+        forcefieldDestroy = 0f;
+        nextForcefield = 0f;
     }
 
     // Update is called once per frame
@@ -50,15 +64,23 @@ public class CharacterControl : MonoBehaviour
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
 
-        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber))
+        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber + "1"))
         {
             Shoot();
             nextFire = Time.time + fireDelay;
         }
 
-        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire2" + playerNumber)) {
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2")) {
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
+        }
+
+        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3")) {
+            Forcefield();
+            nextForcefield = Time.time + forcefieldDelay;
+        }
+        if (Time.time > forcefieldDestroy) {
+            Destroy(forcefield);
         }
     }
 
@@ -75,9 +97,15 @@ public class CharacterControl : MonoBehaviour
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
+    void Forcefield () {
+        forcefield = Instantiate(forcefieldPrefab, transform);
+        forcefieldDestroy = Time.time + forcefieldTime;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("On trigger enter " + col.gameObject.tag);
+        if (Time.time <= forcefieldDestroy) return;
         if (col.gameObject.tag == "Goal")
         {
             GameManager.instance.Win(playerNumber);
