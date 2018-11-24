@@ -53,8 +53,8 @@ public class Enemy : MonoBehaviour
     IEnumerator SwapAndClone()
     {
         transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.1f, 0.5f),
-                Random.Range(-5f, 5f),
+                getOtherPlayer().transform.position.x * Random.Range(0.1f, 0.9f),
+                Random.Range(-15f, 15f),
                 transform.position.z
             );
 
@@ -63,8 +63,8 @@ public class Enemy : MonoBehaviour
 
         if (transform.localScale.x > 0.5f)
         {
-            transform.localScale *= 0.9f;
-            GetComponent<Rigidbody2D>().mass *= 0.6f;
+            transform.localScale *= 0.8f;
+            GetComponent<Rigidbody2D>().mass *= 0.8f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
             Instantiate(gameObject);
