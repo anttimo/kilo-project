@@ -110,10 +110,10 @@ public class CharacterControl : MonoBehaviour
         Debug.Log("Start KB");
         knockingBack = true;
         rb.AddForce(
-            new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 5, 0),
+            new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 15, 0),
             ForceMode2D.Impulse
         );
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.25f);
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
         knockingBack = false;
