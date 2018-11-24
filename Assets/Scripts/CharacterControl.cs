@@ -27,6 +27,7 @@ public class CharacterControl : MonoBehaviour
     public bool knockingBack = false;
 
     private float maxY;
+    private float maxX = 26f;
 
     public float forcefieldDestroy;
 
@@ -75,7 +76,8 @@ public class CharacterControl : MonoBehaviour
         }
 
         var yPosition = Mathf.Clamp(transform.position.y, -1 * maxY / 2, maxY / 2);
-        transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
+        var xPosition = Mathf.Clamp(transform.position.x, -1 * maxX, maxX);
+        transform.position = new Vector3(xPosition, yPosition, transform.position.z);
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
