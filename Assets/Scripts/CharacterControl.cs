@@ -43,6 +43,8 @@ public class CharacterControl : MonoBehaviour
     void Awake()
     {
         maxY = Camera.main.orthographicSize * 2.0f;
+        if (playerNumber == 1) GameManager.instance.player1 = gameObject;
+        if (playerNumber == 2) GameManager.instance.player2 = gameObject;
     }
 
     void Start()
@@ -107,7 +109,7 @@ public class CharacterControl : MonoBehaviour
         int rotation = 180;
         if (playerNumber == 2) rotation = 0;
         Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
-        SoundManagerScript.PlaySound("shoot");
+        SoundManager.PlaySound("shoot");
     }
 
     void Shockwave()
@@ -115,7 +117,7 @@ public class CharacterControl : MonoBehaviour
         int rotation = 180;
         if (playerNumber == 2) rotation = 0;
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
-        SoundManagerScript.PlaySound("shockwave");
+        SoundManager.PlaySound("shockwave");
     }
 
     void Forcefield()
@@ -138,7 +140,7 @@ public class CharacterControl : MonoBehaviour
             if (knockingBack)
             {
                 Destroy(col.gameObject);
-                SoundManagerScript.PlaySound("enemyHit");
+                SoundManager.PlaySound("enemyHit");
             }
         }
         if (col.gameObject.tag == "Bullet")
@@ -152,10 +154,8 @@ public class CharacterControl : MonoBehaviour
     {
         if (knockingBack)
         {
-            Debug.Log("Skip KB");
             yield break;
         }
-        Debug.Log("Start KB");
         knockingBack = true;
         rb.AddForce(
             new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 15, 0),
@@ -165,6 +165,5 @@ public class CharacterControl : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
         knockingBack = false;
-        Debug.Log("Stop KB");
     }
 }

@@ -13,9 +13,10 @@ public class Loader : MonoBehaviour
             //Instantiate gameManager prefab
             Instantiate(gameManager);
         }
-        
+
         if (SoundManager.instance == null)
         {
+            //Instantiate gameManager prefab
             Instantiate(soundManager);
         }
     }
