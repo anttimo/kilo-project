@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
     {
         transform.position = new Vector3(
                 transform.position.x,
-                10f,
+                20f,
                 transform.position.z);
 
         speed *= 1.5f;
