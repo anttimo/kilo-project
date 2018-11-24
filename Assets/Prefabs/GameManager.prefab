@@ -51,3 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d3a3fb43666410cb9402ea8f4c9ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player1score: 0
+  player2score: 0
+  player1scoreText: {fileID: 114743979775112192, guid: 01c8d32b69e4755408c6c1bc5c5575ea,
+    type: 2}
+  player2scoreText: {fileID: 114075499748157158, guid: 01c8d32b69e4755408c6c1bc5c5575ea,
+    type: 2}
+  paused: 1
+  loadCount: 1
