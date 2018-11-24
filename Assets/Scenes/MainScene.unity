@@ -226,7 +226,8 @@ Prefab:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 61414259679271130, guid: 6a70b138eb47f864ebd299cb6efa900f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 6a70b138eb47f864ebd299cb6efa900f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &144931608
@@ -783,7 +784,6 @@ GameObject:
   m_Component:
   - component: {fileID: 487057000}
   - component: {fileID: 487056999}
-  - component: {fileID: 487056998}
   - component: {fileID: 487057001}
   m_Layer: 0
   m_Name: LeftCamera
@@ -792,13 +792,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &487056998
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 487056997}
-  m_Enabled: 1
 --- !u!20 &487056999
 Camera:
   m_ObjectHideFlags: 0
@@ -1307,6 +1300,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1246710824522894, guid: c49bc933444e4874a9c010c374318bbf,
     type: 2}
   m_PrefabInternal: {fileID: 1823101770}
+--- !u!70 &1591147086
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1591147085}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 0.57}
+  m_Direction: 1
 --- !u!212 &1591147089 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 212558419808592242, guid: c49bc933444e4874a9c010c374318bbf,
@@ -1353,6 +1361,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1338071548871988, guid: 6a70b138eb47f864ebd299cb6efa900f,
     type: 2}
   m_PrefabInternal: {fileID: 2843908}
+--- !u!70 &1697796162
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697796161}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 0.57}
+  m_Direction: 1
 --- !u!212 &1697796165 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 212543852452384376, guid: 6a70b138eb47f864ebd299cb6efa900f,
@@ -1551,7 +1574,18 @@ Prefab:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 61668412671871204, guid: c49bc933444e4874a9c010c374318bbf,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61668412671871204, guid: c49bc933444e4874a9c010c374318bbf,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.74
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 61668412671871204, guid: c49bc933444e4874a9c010c374318bbf, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: c49bc933444e4874a9c010c374318bbf, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1970458676
@@ -1826,7 +1860,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2141337558}
   - component: {fileID: 2141337557}
-  - component: {fileID: 2141337556}
   - component: {fileID: 2141337559}
   - component: {fileID: 2141337560}
   m_Layer: 0
@@ -1836,13 +1869,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2141337556
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2141337555}
-  m_Enabled: 1
 --- !u!20 &2141337557
 Camera:
   m_ObjectHideFlags: 0
