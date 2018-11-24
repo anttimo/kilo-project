@@ -21,12 +21,12 @@ public class Enemy : MonoBehaviour
         }
         var playerPos = getTargetPlayer().transform.position;
         var diff = playerPos - transform.position;
-        if (diff.x * playerPos.x < 0 && playerPos.x * transform.position.x > 0 && Mathf.Abs(diff.x) > 2)
-        {
-            frozen = true;
-            StartCoroutine(SwapAndClone());
-            return;
-        }
+        // if (diff.x * playerPos.x < 0 && playerPos.x * transform.position.x > 0 && Mathf.Abs(diff.x) > 2)
+        // {
+        //     frozen = true;
+        //     StartCoroutine(SwapAndClone());
+        //     return;
+        // }
         var dir = diff.normalized
             + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
         transform.position += dir.normalized * speed * Time.deltaTime;
