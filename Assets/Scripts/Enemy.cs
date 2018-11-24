@@ -19,8 +19,13 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        var dir = (getTargetPlayer().transform.position
-            - transform.position).normalized
+        var diff = (getTargetPlayer().transform.position - transform.position);
+        if (diff.x * transform.position.x < 0 && Mathf.Abs(diff.x) > 2)
+        {
+            StartCoroutine(SwapAndClone());
+            return;
+        }
+        var dir = diff.normalized
             + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
         transform.position += dir.normalized * speed * Time.deltaTime;
     }
