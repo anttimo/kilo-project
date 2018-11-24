@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public bool isLeftCamera = true;
     public float cameraSpeed = 12f;
     public GameObject arena;
-    public static float arenaWidth = 20f;
+    public static float arenaWidth = 36f;
 
     public GameObject player;
     private Vector3 offset;

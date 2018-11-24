@@ -27,7 +27,7 @@ public class CharacterControl : MonoBehaviour
     public bool knockingBack = false;
 
     private float maxY;
-    private float maxX = 26f;
+    private float maxX = 40f;
 
     public float forcefieldDestroy;
 
@@ -134,14 +134,8 @@ public class CharacterControl : MonoBehaviour
             StartCoroutine(Knockback());
             if (knockingBack)
             {
-                Destroy(col.gameObject);
                 SoundManager.PlaySound("enemyHit");
             }
-        }
-        if (col.gameObject.tag == "Bullet")
-        {
-            //StartCoroutine(Knockback());
-            //Destroy(col.gameObject);
         }
     }
 
