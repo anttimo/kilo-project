@@ -171,6 +171,16 @@ Prefab:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1697796165}
+    - target: {fileID: 212543852452384376, guid: 6a70b138eb47f864ebd299cb6efa900f,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114347162401725408, guid: 6a70b138eb47f864ebd299cb6efa900f,
+        type: 2}
+      propertyPath: fireDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a70b138eb47f864ebd299cb6efa900f, type: 2}
   m_IsPrefabAsset: 0
@@ -1300,6 +1310,11 @@ Prefab:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1591147089}
+    - target: {fileID: 114283140564072470, guid: c49bc933444e4874a9c010c374318bbf,
+        type: 2}
+      propertyPath: fireDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c49bc933444e4874a9c010c374318bbf, type: 2}
   m_IsPrefabAsset: 0

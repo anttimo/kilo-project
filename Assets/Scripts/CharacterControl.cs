@@ -14,11 +14,15 @@ public class CharacterControl : MonoBehaviour
     public static Vector3 originLocation;
 
     public SpriteRenderer spriteRenderer;
+    private float nextFire;
+    public float fireDelay;
 
     // Use this for initialization
     void Start()
     {
         originLocation = transform.position;
+        fireDelay = 0.5f;
+        nextFire = 0f;
     }
 
     // Update is called once per frame
@@ -35,9 +39,10 @@ public class CharacterControl : MonoBehaviour
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
 
-        if (Input.GetButtonDown("Fire" + playerNumber))
+        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber))
         {
             Shoot();
+            nextFire = Time.time + fireDelay;
         }
     }
 
