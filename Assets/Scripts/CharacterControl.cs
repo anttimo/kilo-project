@@ -52,10 +52,10 @@ public class CharacterControl : MonoBehaviour
         {
             // Destroy(col.gameObject);
             transform.position = new Vector3(
-                transform.position.x * 1.1f,
+                transform.position.x * 1.05f,
                 transform.position.y,
                 transform.position.z
-            )
+            );
         }
         // if (col.gameObject.tag == "Bullet") {
         //     Destroy(col.gameObject);
