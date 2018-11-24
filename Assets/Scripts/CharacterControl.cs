@@ -21,8 +21,6 @@ public class CharacterControl : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     private float nextFire;
-    public float fireDelay;
-
     private float nextShockwave;
     public float shockwaveDelay = 3f;
     public Rigidbody2D rb;
@@ -50,7 +48,6 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         originLocation = transform.position;
-        fireDelay = 0.2f;
         nextFire = 0f;
         nextShockwave = 0f;
         forcefieldDestroy = 0f;
@@ -83,10 +80,9 @@ public class CharacterControl : MonoBehaviour
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
 
-        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber + "1"))
+        if (Input.GetButtonDown("Fire" + playerNumber + "1"))
         {
             Shoot();
-            nextFire = Time.time + fireDelay;
         }
 
         if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2"))
@@ -147,8 +143,8 @@ public class CharacterControl : MonoBehaviour
         }
         if (col.gameObject.tag == "Bullet")
         {
-            StartCoroutine(Knockback());
-            Destroy(col.gameObject);
+            //StartCoroutine(Knockback());
+            //Destroy(col.gameObject);
         }
     }
 
