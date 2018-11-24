@@ -52,10 +52,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator SwapAndClone()
     {
-        Debug.Log("Transform: " + transform.position.x + " Player1: " + GameManager.instance.player1.transform.position.x);
         transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
-                Random.Range(-10f, 10f),
+                transform.position.x,
+                10f,
                 transform.position.z);
 
         speed *= 1.5f;
@@ -67,6 +66,11 @@ public class Enemy : MonoBehaviour
             GetComponent<Rigidbody2D>().mass *= 0.6f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
+            transform.position = new Vector3(
+                getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
+                Random.Range(-10f, 10f),
+                transform.position.z
+            );
             Instantiate(gameObject);
         }
         else
