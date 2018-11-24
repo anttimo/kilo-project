@@ -135,9 +135,15 @@ MonoBehaviour:
     type: 2}
   shockwavePrefab: {fileID: 1924563422151484, guid: 788a8e0ad66e8644883ce7c677b69cb1,
     type: 2}
+  forcefieldPrefab: {fileID: 1555638638389092, guid: eb0b866efc21f2f44a4918cc1888c8fc,
+    type: 2}
   spriteRenderer: {fileID: 0}
   fireDelay: 0
   shockwaveDelay: 3
+  forcefieldDestroy: 0
+  forcefieldTime: 2
+  nextForcefield: 0
+  forcefieldDelay: 8
 --- !u!212 &212558419808592242
 SpriteRenderer:
   m_ObjectHideFlags: 1

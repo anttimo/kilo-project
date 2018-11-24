@@ -7,7 +7,6 @@ public class Shockwave : MonoBehaviour {
 
 	
     public float speed = 40f;
-    public float knockBack = 10.0f;
     public Rigidbody2D rb;
 
 	private List<GameObject> enemiesHit = new List<GameObject>();
@@ -25,7 +24,11 @@ public class Shockwave : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D col) {
 		if (!enemiesHit.Contains(col.gameObject)) {
 			enemiesHit.Add(col.gameObject);
-			col.gameObject.transform.position = new Vector2(col.gameObject.transform.position.x  * 0.95f, col.gameObject.transform.position.y);
+			if (rb.velocity.x > 0) {
+				col.gameObject.transform.position = new Vector2(col.gameObject.transform.position.x  + 3f, col.gameObject.transform.position.y);
+			} else {
+				col.gameObject.transform.position = new Vector2(col.gameObject.transform.position.x  - 3f, col.gameObject.transform.position.y);
+			}
 		}
 	}
 }
