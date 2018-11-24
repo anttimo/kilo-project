@@ -43,36 +43,33 @@ public class Enemy : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
-            bool isPlayer1 = col.GetComponent<Bullet>().getInitialPosition().x > 0;
-            bool destroy = isPlayer1 ? getTargetPlayer() == GameManager.instance.player1 : getTargetPlayer() == GameManager.instance.player2;
-            if (destroy)
-            {
-                Destroy(col.gameObject);
-                transform.position = new Vector3(
-                    getOtherPlayer().transform.position.x * 0.8f,
-                    getOtherPlayer().transform.position.y,
-                    transform.position.z);
-                // TODO: Take player from GameManager and switch the target to it
+            var initialBulletX = col.GetComponent<Bullet>().initialPosition.x;
+            bool bulletHasCrossed = initialBulletX * col.gameObject.transform.position.x < 0;
 
-            }
-
-            transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.6f, 0.8f),
-                getOtherPlayer().transform.position.y * Random.Range(0.5f, 1.5f),
-                transform.position.z);
-
-            if (transform.localScale.x < 0.2f)
+            //bool destroy = isPlayer1 ? getTargetPlayer() == GameManager.instance.player1 : getTargetPlayer() == GameManager.instance.player2;
+            if (bulletHasCrossed)
             {
                 return;
             }
 
-            var clone = Instantiate(gameObject);
-            clone.transform.localScale = clone.transform.localScale * 0.8f;
-            transform.localScale *= 0.5f;
-            var enemy = clone.GetComponent<Enemy>();
-            enemy.speed *= 2;
-            enemy.speed = Mathf.Clamp(enemy.speed, 0.5f, 2f);
-            // TODO: Take player from GameManager and switch the target to it
+            Destroy(col.gameObject);
+
+            transform.position = new Vector3(
+                getOtherPlayer().transform.position.x * Random.Range(0.2f, 0.4f),
+                getOtherPlayer().transform.position.y * Random.Range(0.5f, 1.5f),
+                transform.position.z);
+
+            speed *= 1.5f;
+            speed = Mathf.Clamp(speed, 0.5f, 1.5f);
+
+            if (transform.localScale.x > 0.2f)
+            {
+                transform.localScale *= 0.8f;
+                GetComponent<Rigidbody2D>().mass *= 0.8f;
+                Instantiate(gameObject);
+
+            }
+
         }
     }
 }
