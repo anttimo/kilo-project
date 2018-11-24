@@ -28,6 +28,11 @@ public class CharacterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.paused)
+        {
+            return;
+        }
+
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
@@ -69,8 +74,13 @@ public class CharacterControl : MonoBehaviour
                 transform.position.z
             );
         }
-        // if (col.gameObject.tag == "Bullet") {
-        //     Destroy(col.gameObject);
-        // }
+        if (col.gameObject.tag == "Bullet") {
+            transform.position = new Vector3(
+                transform.position.x * 1.05f,
+                transform.position.y,
+                transform.position.z
+            );
+            Destroy(col.gameObject);
+        }
     }
 }

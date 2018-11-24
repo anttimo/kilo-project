@@ -50,14 +50,14 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        if (!isReady)
+        if (GameManager.instance.paused)
         {
             var offsetX = transform.position.x + Mathf.Sign(transform.position.x) * cameraSpeed / 40;
             targetCamera.transform.position = new Vector3(offsetX, transform.position.y, transform.position.z);
 
             if (Mathf.Abs(targetCamera.transform.position.x) >= arenaWidth)
             {
-                isReady = true;
+                GameManager.instance.paused = false;
                 offset = transform.position - player.transform.position;
             }
             return;
