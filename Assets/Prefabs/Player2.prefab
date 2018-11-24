@@ -133,6 +133,11 @@ MonoBehaviour:
   firepoint: {fileID: 4363072841219330}
   bulletPrefab: {fileID: 1969097072920620, guid: 156040c194dbb5d4fa53235d8d3f8b25,
     type: 2}
+  shockwavePrefab: {fileID: 1924563422151484, guid: 788a8e0ad66e8644883ce7c677b69cb1,
+    type: 2}
+  spriteRenderer: {fileID: 0}
+  fireDelay: 0
+  shockwaveDelay: 3
 --- !u!212 &212558419808592242
 SpriteRenderer:
   m_ObjectHideFlags: 1

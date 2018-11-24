@@ -11,11 +11,16 @@ public class CharacterControl : MonoBehaviour
     public Transform firepoint;
     public GameObject bulletPrefab;
 
+    public GameObject shockwavePrefab;
+
     public static Vector3 originLocation;
 
     public SpriteRenderer spriteRenderer;
     private float nextFire;
     public float fireDelay;
+
+    private float nextShockwave;
+    public float shockwaveDelay = 3f;
 
     // Use this for initialization
     void Start()
@@ -23,6 +28,7 @@ public class CharacterControl : MonoBehaviour
         originLocation = transform.position;
         fireDelay = 0.5f;
         nextFire = 0f;
+        nextShockwave = 0f;
     }
 
     // Update is called once per frame
@@ -49,6 +55,11 @@ public class CharacterControl : MonoBehaviour
             Shoot();
             nextFire = Time.time + fireDelay;
         }
+
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire2" + playerNumber)) {
+            Shockwave();
+            nextShockwave = Time.time + shockwaveDelay;
+        }
     }
 
     void Shoot()
@@ -56,6 +67,12 @@ public class CharacterControl : MonoBehaviour
         int rotation = 180;
         if (playerNumber == 2) rotation = 0;
         Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
+    }
+
+    void Shockwave () {
+        int rotation = 180;
+        if (playerNumber == 2) rotation = 0;
+        Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -68,17 +85,15 @@ public class CharacterControl : MonoBehaviour
         else if (col.gameObject.tag == "Monster")
         {
             // Destroy(col.gameObject);
-            transform.position = new Vector3(
+            transform.position = new Vector2(
                 transform.position.x * 1.05f,
-                transform.position.y,
-                transform.position.z
+                transform.position.y
             );
         }
         if (col.gameObject.tag == "Bullet") {
-            transform.position = new Vector3(
+            transform.position = new Vector2(
                 transform.position.x * 1.05f,
-                transform.position.y,
-                transform.position.z
+                transform.position.y
             );
             Destroy(col.gameObject);
         }
