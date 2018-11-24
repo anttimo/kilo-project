@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
         if (transform.localScale.x > 0.5f)
         {
-            transform.localScale *= 0.6f;
+            transform.localScale *= 0.8f;
             GetComponent<Rigidbody2D>().mass *= 0.6f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
