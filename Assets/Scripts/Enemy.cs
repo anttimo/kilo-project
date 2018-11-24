@@ -44,7 +44,6 @@ public class Enemy : MonoBehaviour
     IEnumerator SwapAndClone()
     {
 
-
         frozen = true;
         transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
@@ -58,13 +57,13 @@ public class Enemy : MonoBehaviour
         {
             transform.localScale *= 0.6f;
             GetComponent<Rigidbody2D>().mass *= 0.6f;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
             Instantiate(gameObject);
         }
         else
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
         }
     }
