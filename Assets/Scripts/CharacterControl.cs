@@ -79,11 +79,6 @@ public class CharacterControl : MonoBehaviour
         var xPosition = Mathf.Clamp(transform.position.x, -1 * maxX, maxX);
         transform.position = new Vector3(xPosition, yPosition, transform.position.z);
 
-        if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
-        {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
-        }
-
         if (Input.GetButtonDown("Fire" + playerNumber + "1"))
         {
             Shoot();

@@ -59,11 +59,11 @@ public class Enemy : MonoBehaviour
                 transform.position.z);
 
         speed *= 1.5f;
-        speed = Mathf.Clamp(speed, 1, 4);
+        speed = Mathf.Clamp(speed, 1, 3);
 
         if (transform.localScale.x > 0.5f)
         {
-            transform.localScale *= 0.8f;
+            transform.localScale *= 0.7f;
             GetComponent<Rigidbody2D>().mass *= 0.6f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
