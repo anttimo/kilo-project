@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     static Vector3 player1Origin;
     static Vector3 player2Origin;
 
+    public bool paused = true;
+
     private int level = 1;
 
     //Awake is always called before any Start functions

@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.paused)
+        {
+            return;
+        }
+
         transform.position += (getTargetPlayer().transform.position - transform.position) * speed * Time.deltaTime;
     }
 

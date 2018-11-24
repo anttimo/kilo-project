@@ -28,6 +28,11 @@ public class CharacterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.paused)
+        {
+            return;
+        }
+
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
