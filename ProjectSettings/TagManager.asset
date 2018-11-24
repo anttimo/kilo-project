@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Monster
+  - Goal
   layers:
   - Default
   - TransparentFX

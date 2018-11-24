@@ -43,9 +43,10 @@ public class CharacterControl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "CenterLine")
+        Debug.Log("On trigger enter " + col.gameObject.tag);
+        if (col.gameObject.tag == "Goal")
         {
-            GameManager.Win(playerNumber);
+            GameManager.instance.Win(playerNumber);
         }
         else if (col.gameObject.tag == "Monster")
         {

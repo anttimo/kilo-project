@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     static Vector3 player1Origin;
     static Vector3 player2Origin;
-    
+
     private int level = 1;
 
     //Awake is always called before any Start functions
@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
         player2Origin = player2.transform.position;
     }
 
-    void ResetPlayers () {
+    void ResetPlayers()
+    {
         player1.transform.position = player1Origin;
         player2.transform.position = player2Origin;
     }
 
-    public static void Win  (int winner) {
-        Debug.Log(winner);
-        // TODO: Reset player locations to original places, this doesn't work because some static stuff, needs fixin
-        //ResetPlayers();
+    public void Win(int winner)
+    {
+        ResetPlayers();
     }
 }
