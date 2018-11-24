@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         speed *= 1.5f;
         speed = Mathf.Clamp(speed, 1, 3.5f);
 
-        if (transform.localScale.x > 0.4f)
+        if (transform.localScale.x > 0.4f && GameObject.FindGameObjectsWithTag("Monster").Length < 40)
         {
             transform.localScale *= 0.7f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));

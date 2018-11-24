@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public int loadCount = 1;
 
+    public int enemyCount = 14;
+
     //Awake is always called before any Start functions
     void Awake()
     {

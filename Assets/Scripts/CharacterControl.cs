@@ -123,13 +123,11 @@ public class CharacterControl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if (Time.time <= forcefieldDestroy) return;
         if (col.gameObject.tag == "Goal")
         {
             GameManager.instance.Win(playerNumber);
         }
-        else if (col.gameObject.tag == "Monster")
+        else if (col.gameObject.tag == "Monster" && Time.time > forcefieldDestroy)
         {
             StartCoroutine(Knockback());
             if (knockingBack)
