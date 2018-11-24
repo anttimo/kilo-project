@@ -44,12 +44,9 @@ public class CharacterControl : MonoBehaviour
         fireDelay = 0.5f;
         nextFire = 0f;
         nextShockwave = 0f;
-<<<<<<< HEAD
         forcefieldDestroy = 0f;
         nextForcefield = 0f;
-=======
         rb = GetComponent<Rigidbody2D>();
->>>>>>> 1bab4879194858c03a9fd2abad30f8e1f593cbdb
     }
 
     // Update is called once per frame
@@ -79,12 +76,7 @@ public class CharacterControl : MonoBehaviour
             nextFire = Time.time + fireDelay;
         }
 
-<<<<<<< HEAD
         if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2")) {
-=======
-        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire2" + playerNumber))
-        {
->>>>>>> 1bab4879194858c03a9fd2abad30f8e1f593cbdb
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
         }
