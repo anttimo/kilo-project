@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public bool paused = true;
 
-    private int level = 1;
+    public int loadCount = 1;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -50,8 +50,10 @@ public class GameManager : MonoBehaviour
 
     public void Win(int winner)
     {
-        ResetPlayers();
+        // ResetPlayers();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+        paused = true;
+        loadCount++;
     }
 }
