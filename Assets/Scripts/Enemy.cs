@@ -50,7 +50,10 @@ public class Enemy : MonoBehaviour
 
     IEnumerator SwapAndClone()
     {
-
+        if (frozen)
+        {
+            yield break;
+        }
         frozen = true;
         transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
