@@ -56,14 +56,35 @@ public class CameraController : MonoBehaviour
 
         if (GameManager.instance.paused)
         {
-            var offsetX = transform.position.x + Mathf.Sign(transform.position.x) * cameraSpeed / 40;
+            var offsetX = transform.position.x - cameraSpeed / 40;
+
+            if (!isLeftCamera)
+            {
+                offsetX = transform.position.x + cameraSpeed / 40;
+            }
+
             targetCamera.transform.position = new Vector3(offsetX, transform.position.y, transform.position.z);
 
             if (Mathf.Abs(targetCamera.transform.position.x) >= arenaWidth)
             {
-                GameManager.instance.paused = false;
+                if (isLeftCamera)
+                {
+                    GameManager.instance.leftCameraReady = true;
+                }
+                else
+                {
+                    GameManager.instance.rightCameraReady = true;
+                }
+
+                // Make sure both cameras have ended their panning before starting the game.
+                if (GameManager.instance.leftCameraReady && GameManager.instance.rightCameraReady)
+                {
+                    GameManager.instance.paused = false;
+                }
+
                 offset = transform.position - player.transform.position;
             }
+
             return;
         }
 

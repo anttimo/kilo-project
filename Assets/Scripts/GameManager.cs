@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public bool paused = true;
 
+    public bool leftCameraReady = false;
+    public bool rightCameraReady = false;
+
     public int loadCount = 1;
 
     //Awake is always called before any Start functions
