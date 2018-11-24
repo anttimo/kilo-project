@@ -9,17 +9,13 @@ public class Bullet : MonoBehaviour
     public float knockBack = 10.0f;
     public Rigidbody2D rb;
 
-    private Vector3 initialPosition;
+    public Vector3 initialPosition;
 
     void Start()
     {
         initialPosition = transform.position;
         rb.velocity = transform.right * speed;
     }
-
-	public Vector3 getInitialPosition () {
-		return this.initialPosition;
-	}
 
     void Update()
     {
