@@ -21,12 +21,12 @@ public class Enemy : MonoBehaviour
         }
         var playerPos = getTargetPlayer().transform.position;
         var diff = playerPos - transform.position;
-        if (diff.x * playerPos.x < 0 && playerPos.x * transform.position.x > 0 && Mathf.Abs(diff.x) > 2)
-        {
-            frozen = true;
-            StartCoroutine(SwapAndClone());
-            return;
-        }
+        // if (diff.x * playerPos.x < 0 && playerPos.x * transform.position.x > 0 && Mathf.Abs(diff.x) > 2)
+        // {
+        //     frozen = true;
+        //     StartCoroutine(SwapAndClone());
+        //     return;
+        // }
         var dir = diff.normalized
             + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
         transform.position += dir.normalized * speed * Time.deltaTime;
@@ -53,24 +53,20 @@ public class Enemy : MonoBehaviour
     IEnumerator SwapAndClone()
     {
         transform.position = new Vector3(
-                transform.position.x,
-                20f,
-                transform.position.z);
+                getOtherPlayer().transform.position.x * Random.Range(0.1f, 0.5f),
+                Random.Range(-5f, 5f),
+                transform.position.z
+            );
 
         speed *= 1.5f;
         speed = Mathf.Clamp(speed, 1, 3);
 
         if (transform.localScale.x > 0.5f)
         {
-            transform.localScale *= 0.7f;
+            transform.localScale *= 0.9f;
             GetComponent<Rigidbody2D>().mass *= 0.6f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
             frozen = false;
-            transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
-                Random.Range(-10f, 10f),
-                transform.position.z
-            );
             Instantiate(gameObject);
         }
         else
