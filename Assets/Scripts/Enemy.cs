@@ -19,9 +19,11 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        var diff = (getTargetPlayer().transform.position - transform.position);
-        if (diff.x * transform.position.x < 0 && Mathf.Abs(diff.x) > 2)
+        var playerPos = getTargetPlayer().transform.position;
+        var diff = playerPos - transform.position;
+        if (diff.x * playerPos.x < 0 && playerPos.x * transform.position.x > 0 && Mathf.Abs(diff.x) > 2)
         {
+            frozen = true;
             StartCoroutine(SwapAndClone());
             return;
         }
@@ -50,11 +52,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator SwapAndClone()
     {
-        if (frozen)
-        {
-            yield break;
-        }
-        frozen = true;
+        Debug.Log("Transform: " + transform.position.x + " Player1: " + GameManager.instance.player1.transform.position.x);
         transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.5f, 1f),
                 Random.Range(-10f, 10f),
@@ -80,6 +78,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (frozen) return;
         if (col.gameObject.tag == "Bullet")
         {
             var initialBulletX = col.GetComponent<Bullet>().initialPosition.x;
@@ -91,11 +90,13 @@ public class Enemy : MonoBehaviour
             }
 
             Destroy(col.gameObject);
+            frozen = true;
             StartCoroutine(SwapAndClone());
         }
 
         if (col.gameObject.tag == "Player")
         {
+            frozen = true;
             StartCoroutine(SwapAndClone());
         }
     }
