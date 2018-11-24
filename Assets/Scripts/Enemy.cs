@@ -5,26 +5,28 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public GameObject player;
-    // Use this for initialization
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += (player.transform.position - transform.position) * 0.1f * Time.deltaTime;
+        transform.position += (getTargetPlayer().transform.position - transform.position) * 0.1f * Time.deltaTime;
+    }
+
+    private GameObject getTargetPlayer()
+    {
+        if (GameManager.instance.player1.transform.position.x * transform.position.x > 0)
+        {
+            return GameManager.instance.player1;
+        }
+        return GameManager.instance.player2;
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            Destroy(col.gameObject);
-        }
-        else if (col.gameObject.tag == "Bullet")
+        if (col.gameObject.tag == "Bullet")
         {
             Destroy(col.gameObject);
             transform.position = new Vector3(

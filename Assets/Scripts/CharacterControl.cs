@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControl : MonoBehaviour {
+public class CharacterControl : MonoBehaviour
+{
 
     public float speed = 1.0f;
     public int playerNumber = 1;
@@ -13,12 +14,14 @@ public class CharacterControl : MonoBehaviour {
     public static Vector3 originLocation;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         originLocation = transform.position;
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         float moveX = Input.GetAxis("Horizontal" + playerNumber);
         float moveY = Input.GetAxis("Vertical" + playerNumber);
 
@@ -31,20 +34,25 @@ public class CharacterControl : MonoBehaviour {
         }
     }
 
-    void Shoot ()
+    void Shoot()
     {
         int rotation = 180;
         if (playerNumber == 2) rotation = 0;
-        Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler( new Vector3(0, 0, rotation) ));
+        Instantiate(bulletPrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
-    void OnTriggerEnter2D (Collider2D col) {
-        if (col.gameObject.name == "CenterLine") {
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.name == "CenterLine")
+        {
             GameManager.Win(playerNumber);
         }
-
-        if (col.gameObject.tag == "Bullet") {
+        else if (col.gameObject.tag == "Monster")
+        {
             Destroy(col.gameObject);
         }
+        // if (col.gameObject.tag == "Bullet") {
+        //     Destroy(col.gameObject);
+        // }
     }
 }

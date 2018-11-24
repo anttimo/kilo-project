@@ -446,6 +446,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1697796161}
+    - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
   m_IsPrefabAsset: 0
@@ -730,6 +734,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1591147085}
+    - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
   m_IsPrefabAsset: 0
