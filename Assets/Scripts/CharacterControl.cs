@@ -135,6 +135,10 @@ public class CharacterControl : MonoBehaviour
         else if (col.gameObject.tag == "Monster")
         {
             StartCoroutine(Knockback());
+            if (knockingBack)
+            {
+                Destroy(col.gameObject);
+            }
         }
         if (col.gameObject.tag == "Bullet")
         {
