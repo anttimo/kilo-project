@@ -17,11 +17,15 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+	public Vector3 getInitialPosition () {
+		return this.initialPosition;
+	}
+
     void Update()
     {
         if (transform.position.x * initialPosition.x < 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

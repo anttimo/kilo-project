@@ -37,13 +37,17 @@ public class Enemy : MonoBehaviour
     {
         if (col.gameObject.tag == "Bullet")
         {
-            Destroy(col.gameObject);
-            transform.position = new Vector3(
-                getOtherPlayer().transform.position.x * 0.8f,
-                getOtherPlayer().transform.position.y,
-                transform.position.z);
-            // TODO: Take player from GameManager and switch the target to it
+            bool isPlayer1 = col.GetComponent<Bullet>().getInitialPosition().x > 0;
+            bool destroy = isPlayer1 ? getTargetPlayer() == GameManager.instance.player1 : getTargetPlayer() == GameManager.instance.player2;
+            if (destroy) {
+                Destroy(col.gameObject);
+                transform.position = new Vector3(
+                    getOtherPlayer().transform.position.x * 0.8f,
+                    getOtherPlayer().transform.position.y,
+                    transform.position.z);
+                // TODO: Take player from GameManager and switch the target to it
+            
+            }
         }
-
     }
 }
