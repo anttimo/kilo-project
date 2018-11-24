@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
     private bool moveCameras = false;
     void Awake()
     {
-        Debug.Log(arenaWidth);
         targetCamera = GetComponent<Camera>();
         var v3 = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 4, 0, transform.position.z));
         var x = v3.x;
