@@ -21,7 +21,7 @@ public class CharacterControl : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     private float nextFire;
-    public float fireDelay;
+    public float fireDelay = 0.5f;
 
     private float nextShockwave;
     public float shockwaveDelay = 3f;
@@ -48,7 +48,6 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         originLocation = transform.position;
-        fireDelay = 0.5f;
         nextFire = 0f;
         nextShockwave = 0f;
         forcefieldDestroy = 0f;
@@ -135,14 +134,10 @@ public class CharacterControl : MonoBehaviour
         else if (col.gameObject.tag == "Monster")
         {
             StartCoroutine(Knockback());
-            if (knockingBack)
-            {
-                Destroy(col.gameObject);
-            }
         }
         if (col.gameObject.tag == "Bullet")
         {
-            StartCoroutine(Knockback());
+            //StartCoroutine(Knockback());
             Destroy(col.gameObject);
         }
     }
@@ -160,7 +155,7 @@ public class CharacterControl : MonoBehaviour
             new Vector2(transform.position.x / Mathf.Abs(transform.position.x) * 15, 0),
             ForceMode2D.Impulse
         );
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
         knockingBack = false;
