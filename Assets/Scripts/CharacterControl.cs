@@ -13,6 +13,10 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject shockwavePrefab;
 
+    public GameObject forcefieldPrefab;
+
+    private GameObject forcefield;
+
     public static Vector3 originLocation;
 
     public SpriteRenderer spriteRenderer;
@@ -23,7 +27,17 @@ public class CharacterControl : MonoBehaviour
     public float shockwaveDelay = 3f;
     public Rigidbody2D rb;
     public bool knockingBack = false;
+
     private float maxY;
+
+    public float forcefieldDestroy;
+
+    public float forcefieldTime = 2f;
+
+    public float nextForcefield;
+
+    public float forcefieldDelay = 8f;
+
     // Use this for initialization
 
     void Awake()
@@ -37,6 +51,8 @@ public class CharacterControl : MonoBehaviour
         fireDelay = 0.5f;
         nextFire = 0f;
         nextShockwave = 0f;
+        forcefieldDestroy = 0f;
+        nextForcefield = 0f;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -58,27 +74,33 @@ public class CharacterControl : MonoBehaviour
         }
 
         var yPosition = Mathf.Clamp(transform.position.y, -1 * maxY / 2, maxY / 2);
-        Debug.Log("asdfasdfasdf " + maxY + "   " + Camera.main.orthographicSize);
         transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
-
-        //GetComponent<Rigidbody2D>().AddForce( new Vector2(moveX * speed, moveY * speed) );
-
 
         if (moveX != 0 && !spriteRenderer.flipX ? (moveX < 0.01f) : (moveX > 0.01f))
         {
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
 
-        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber))
+        if ((Time.time > nextFire) && Input.GetButtonDown("Fire" + playerNumber + "1"))
         {
             Shoot();
             nextFire = Time.time + fireDelay;
         }
 
-        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire2" + playerNumber))
+        if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2"))
         {
             Shockwave();
             nextShockwave = Time.time + shockwaveDelay;
+        }
+
+        if ((Time.time > nextForcefield) && Input.GetButtonDown("Fire" + playerNumber + "3"))
+        {
+            Forcefield();
+            nextForcefield = Time.time + forcefieldDelay;
+        }
+        if (Time.time > forcefieldDestroy)
+        {
+            Destroy(forcefield);
         }
     }
 
@@ -96,8 +118,16 @@ public class CharacterControl : MonoBehaviour
         Instantiate(shockwavePrefab, firepoint.position, Quaternion.Euler(new Vector3(0, 0, rotation)));
     }
 
+    void Forcefield()
+    {
+        forcefield = Instantiate(forcefieldPrefab, transform);
+        forcefieldDestroy = Time.time + forcefieldTime;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
+
+        if (Time.time <= forcefieldDestroy) return;
         if (col.gameObject.tag == "Goal")
         {
             GameManager.instance.Win(playerNumber);
