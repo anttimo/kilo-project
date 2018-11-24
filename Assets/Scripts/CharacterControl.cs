@@ -134,14 +134,8 @@ public class CharacterControl : MonoBehaviour
             StartCoroutine(Knockback());
             if (knockingBack)
             {
-                Destroy(col.gameObject);
                 SoundManager.PlaySound("enemyHit");
             }
-        }
-        if (col.gameObject.tag == "Bullet")
-        {
-            //StartCoroutine(Knockback());
-            //Destroy(col.gameObject);
         }
     }
 
