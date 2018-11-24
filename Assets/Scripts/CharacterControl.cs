@@ -27,7 +27,7 @@ public class CharacterControl : MonoBehaviour
     public bool knockingBack = false;
 
     private float maxY;
-    private float maxX = 26f;
+    private float maxX = 40f;
 
     public float forcefieldDestroy;
 
