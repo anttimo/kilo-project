@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float speed = 0.5f;
+    public float speed = 1;
     public bool frozen = false;
 
     void Start()
@@ -19,8 +19,10 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-
-        transform.position += (getTargetPlayer().transform.position - transform.position) * speed * Time.deltaTime;
+        var dir = (getTargetPlayer().transform.position
+            - transform.position).normalized
+            + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
     private GameObject getTargetPlayer()
@@ -50,8 +52,8 @@ public class Enemy : MonoBehaviour
                 Random.Range(-10f, 10f),
                 transform.position.z);
 
-        speed *= 1.3f;
-        speed = Mathf.Clamp(speed, 0.25f, 0.75f);
+        speed *= 1.5f;
+        speed = Mathf.Clamp(speed, 1, 4);
 
         if (transform.localScale.x > 0.5f)
         {
@@ -75,7 +77,6 @@ public class Enemy : MonoBehaviour
             var initialBulletX = col.GetComponent<Bullet>().initialPosition.x;
             bool bulletHasCrossed = initialBulletX * col.gameObject.transform.position.x < 0;
 
-            //bool destroy = isPlayer1 ? getTargetPlayer() == GameManager.instance.player1 : getTargetPlayer() == GameManager.instance.player2;
             if (bulletHasCrossed)
             {
                 return;

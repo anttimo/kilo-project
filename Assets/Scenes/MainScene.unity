@@ -276,6 +276,11 @@ Prefab:
       propertyPath: m_Name
       value: Monster (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
   m_IsPrefabAsset: 0
@@ -330,6 +335,11 @@ Prefab:
     - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
       propertyPath: m_TagString
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
@@ -536,6 +546,11 @@ Prefab:
       propertyPath: m_Name
       value: Monster (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
   m_IsPrefabAsset: 0
@@ -670,6 +685,11 @@ Prefab:
     - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
       propertyPath: m_TagString
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
@@ -1134,6 +1154,11 @@ Prefab:
       propertyPath: m_Name
       value: Monster (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
   m_IsPrefabAsset: 0
@@ -1198,6 +1223,11 @@ Prefab:
     - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
       propertyPath: m_Name
       value: Monster (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
@@ -1500,6 +1530,11 @@ Prefab:
     - target: {fileID: 1305306051333814, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
       propertyPath: m_Name
       value: Monster (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114486540605005334, guid: 4dd285a38286246ff8f62054d73eab74,
+        type: 2}
+      propertyPath: speed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dd285a38286246ff8f62054d73eab74, type: 2}
