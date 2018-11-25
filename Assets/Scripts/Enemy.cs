@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     public float speed = 1;
     public bool frozen = false;
 
+    public ParticleSystem pSystem;
+
     void Start()
     {
 
@@ -61,7 +63,7 @@ public class Enemy : MonoBehaviour
         speed *= 1.5f;
         speed = Mathf.Clamp(speed, 1, 3.5f);
 
-        if (transform.localScale.x > 0.4f && GameObject.FindGameObjectsWithTag("Monster").Length < 40)
+        if (transform.localScale.x > 0.4f && GameObject.FindGameObjectsWithTag("Monster").Length < 35)
         {
             transform.localScale *= 0.7f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
@@ -88,6 +90,7 @@ public class Enemy : MonoBehaviour
                 return;
             }
 
+            pSystem.Play();
             Destroy(col.gameObject);
             frozen = true;
             StartCoroutine(SwapAndClone());
