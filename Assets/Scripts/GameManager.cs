@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKeyDown && paused)
         {
             StartCoroutine(StartGame());
         }
@@ -69,9 +69,14 @@ public class GameManager : MonoBehaviour
     IEnumerator StartGame()
     {
         GameObject.Find("MiddlePillar").GetComponent<Animator>().SetBool("gameStart", true);
-        GameObject.Find("GameLogo").SetActive(false);
-        GameObject.Find("StartText").SetActive(false);
-        GameObject.Find("DarkenBG").SetActive(false);
+
+        // Never do it like this, horrible.
+        GameObject logo = GameObject.Find("GameLogo");
+        GameObject st = GameObject.Find("StartText");
+        GameObject bg = GameObject.Find("DarkenBG");
+        if (logo) logo.SetActive(false);
+        if (st) st.SetActive(false);
+        if (bg) bg.SetActive(false);
         yield return new WaitForSecondsRealtime(1);
         moveCameras = true;
         paused = false;

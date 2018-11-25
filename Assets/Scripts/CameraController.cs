@@ -21,7 +21,8 @@ public class CameraController : MonoBehaviour
     {
         /*
             Now just manually placing the camera in scene
-        targetCamera = GetComponent<Camera>();
+        */
+        targetCamera = GetComponent<Camera>();/*
         var v3 = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 4, 0, transform.position.z));
         var x = v3.x;
         if (!isLeftCamera)
@@ -29,7 +30,7 @@ public class CameraController : MonoBehaviour
             x = -1 * x;
         }
 
-        targetCamera.transform.position = new Vector3(x, transform.position.y, transform.position.z);*/
+        targetCamera.transform.position = new Vector3(x, transform.position.y, transform.position.z); */
     }
 
     // Update is called once per frame
