@@ -85,6 +85,11 @@ public class GameManager : MonoBehaviour
 
     public void Win(int winner)
     {
+        // AVoid double scoring
+        if (paused)
+        {
+            return;
+        }
         // ResetPlayers();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
