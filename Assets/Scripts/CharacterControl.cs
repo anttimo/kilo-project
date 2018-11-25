@@ -59,7 +59,7 @@ public class CharacterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.paused)
+        if (GameManager.instance.paused || GameManager.instance.moveCameras)
         {
             return;
         }
