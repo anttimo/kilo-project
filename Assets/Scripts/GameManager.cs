@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
 
     public int player2score = 0;
 
-    public Text player1scoreText;
-    public Text player2scoreText;
-
     public bool paused = true;
 
     public bool leftCameraReady = false;
@@ -56,8 +53,6 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(StartGame());
         }
-        player1scoreText.text = player1score.ToString();
-        player2scoreText.text = player2score.ToString();
     }
 
     //Initializes the game for each level.
