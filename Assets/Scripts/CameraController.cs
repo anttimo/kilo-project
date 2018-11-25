@@ -30,31 +30,15 @@ public class CameraController : MonoBehaviour
         targetCamera.transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
 
-    void Start()
-    {
-        StartCoroutine(Wait());
-    }
-
-    public void MoveCamera()
-    {
-        moveCameras = true;
-    }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSecondsRealtime(2);
-        MoveCamera();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (!moveCameras)
+        if (GameManager.instance.paused)
         {
             return;
         }
 
-        if (GameManager.instance.paused)
+        if (GameManager.instance.moveCameras)
         {
             var offsetX = transform.position.x - cameraSpeed / 40;
 
@@ -79,7 +63,7 @@ public class CameraController : MonoBehaviour
                 // Make sure both cameras have ended their panning before starting the game.
                 if (GameManager.instance.leftCameraReady && GameManager.instance.rightCameraReady)
                 {
-                    GameManager.instance.paused = false;
+                    GameManager.instance.moveCameras = false;
                 }
 
                 offset = transform.position - player.transform.position;

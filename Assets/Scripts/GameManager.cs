@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     public int enemyCount = 14;
 
+    public bool moveCameras;
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -48,13 +50,31 @@ public class GameManager : MonoBehaviour
         InitGame();
     }
 
+    void Update()
+    {
+        if (Input.anyKey)
+        {
+            StartCoroutine(StartGame());
+        }
+        player1scoreText.text = player1score.ToString();
+        player2scoreText.text = player2score.ToString();
+    }
+
     //Initializes the game for each level.
     void InitGame()
     {
         player1Origin = player1.transform.position;
         player2Origin = player2.transform.position;
-        player1scoreText.text = "0";
-        player2scoreText.text = "0";
+    }
+    IEnumerator StartGame()
+    {
+        GameObject.Find("MiddlePillar").GetComponent<Animator>().SetBool("gameStart", true);
+        GameObject.Find("GameLogo").SetActive(false);
+        GameObject.Find("StartText").SetActive(false);
+        GameObject.Find("DarkenBG").SetActive(false);
+        yield return new WaitForSecondsRealtime(1);
+        moveCameras = true;
+        paused = false;
     }
 
     void ResetPlayers()
@@ -72,9 +92,6 @@ public class GameManager : MonoBehaviour
         loadCount++;
         if (winner == 1) this.player1score++;
         else this.player2score++;
-
-        player1scoreText.text = player1score.ToString();
-        player2scoreText.text = player2score.ToString();
 
     }
 }
