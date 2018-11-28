@@ -37,6 +37,10 @@ public class CharacterControl : MonoBehaviour
 
     public float forcefieldDelay = 8f;
 
+    public float bulletDelay = 0.1f;
+    public float timeSinceLastBullet = 0f;
+
+
     // Use this for initialization
 
     void Awake()
@@ -77,9 +81,12 @@ public class CharacterControl : MonoBehaviour
         var xPosition = Mathf.Clamp(transform.position.x, -1 * maxX, maxX);
         transform.position = new Vector3(xPosition, yPosition, transform.position.z);
 
-        if (Input.GetButtonDown("Fire" + playerNumber + "1"))
+        if (Input.GetButton("Fire" + playerNumber + "1") && timeSinceLastBullet > bulletDelay)
         {
             Shoot();
+            timeSinceLastBullet = 0f;
+        } else {
+            timeSinceLastBullet += Time.deltaTime;
         }
 
         if ((Time.time > nextShockwave) && Input.GetButtonDown("Fire" + playerNumber + "2"))
