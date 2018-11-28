@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public bool moveCameras;
 
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -91,12 +92,16 @@ public class GameManager : MonoBehaviour
             return;
         }
         // ResetPlayers();
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
         paused = true;
-        loadCount++;
         if (winner == 1) this.player1score++;
         else this.player2score++;
+        StartCoroutine(RunWinLogicWithWait());
+    }
 
+    IEnumerator RunWinLogicWithWait() {
+        yield return new WaitForSecondsRealtime(3);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        loadCount++;
     }
 }
