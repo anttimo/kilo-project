@@ -56,14 +56,14 @@ public class Enemy : MonoBehaviour
     {
         transform.position = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.3f, 0.9f),
-                Random.Range(-10f, 10f),
+                Random.Range(-6f, 6f),
                 transform.position.z
             );
 
         speed *= 1.5f;
-        speed = Mathf.Clamp(speed, 1, 3.5f);
+        speed = Mathf.Clamp(speed, 1, 2.5f);
 
-        if (transform.localScale.x > 0.4f && GameObject.FindGameObjectsWithTag("Monster").Length < 35)
+        if (transform.localScale.x > 0.4f && GameObject.FindGameObjectsWithTag("Monster").Length < 45)
         {
             transform.localScale *= 0.7f;
             yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));

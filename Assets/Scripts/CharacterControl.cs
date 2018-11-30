@@ -37,7 +37,7 @@ public class CharacterControl : MonoBehaviour
 
     public float forcefieldDelay = 8f;
 
-    public float bulletDelay = 0.1f;
+    public float bulletDelay = 0.25f;
     public float timeSinceLastBullet = 0f;
 
 
