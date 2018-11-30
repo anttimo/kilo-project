@@ -79,7 +79,6 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (frozen) return;
         if (col.gameObject.tag == "Bullet")
         {
             var initialBulletX = col.GetComponent<Bullet>().initialPosition.x;
