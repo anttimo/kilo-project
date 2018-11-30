@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public bool moveCameras;
 
+    private bool readyForNewGame = true;
+
 
     //Awake is always called before any Start functions
     void Awake()
@@ -50,6 +52,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!readyForNewGame) {
+            return;
+        }
+
         if (Input.anyKeyDown && paused)
         {
             StartCoroutine(StartGame());
@@ -76,6 +82,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         moveCameras = true;
         paused = false;
+        readyForNewGame = false;
     }
 
     void ResetPlayers()
@@ -103,5 +110,6 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
         loadCount++;
+        readyForNewGame = true;
     }
 }
