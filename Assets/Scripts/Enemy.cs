@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
         // This caused the ghost moving bugging, test if it's needed or not
         if (col.gameObject.tag == "Player")
         {
-            //SwapAndClone();
+            Die();
         }
     }
 }
