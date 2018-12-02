@@ -9,11 +9,13 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem pSystem;
 
-    private Vector3 targetPosition;
+    private Vector3 ghostTargetPosition;
 
     private bool isGhost = false;
 
     private Collider2D enemyCollider;
+    private float ghostSpeed = 20f;
+
 
     void Start()
     {
@@ -28,23 +30,44 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        var targetPos = getTargetPlayer().transform.position;
-
-        if (isGhost) {
-            targetPos = targetPosition;
-
-            if (Vector3.Distance(transform.position, targetPos) <= 0.1f)
-            {
-                Rebirth();
-                return;
-            }
+        if (isGhost)
+        {
+            MoveGhost();
+            return;
         }
-        
+
+        Move();
+    }
+
+    void Move() {
+        var targetPos = getTargetPlayer().transform.position;
         var diff = targetPos - transform.position;
 
-        // TODO: Maybe could use Vector3.MoveTowards?
         var dir = diff.normalized
             + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+
+        transform.position += dir.normalized * speed * Time.deltaTime;
+    }
+
+    void MoveGhost() {
+        speed = ghostSpeed;
+        if (Vector3.Distance(transform.position, ghostTargetPosition) <= 0.1f)
+        {
+            Rebirth();
+            return;
+        }
+
+        // Slow down so monster doesn't get into endless loop of going too fast past the target
+        if (Vector3.Distance(transform.position, ghostTargetPosition) <= 1f)
+        {
+            speed = ghostSpeed / 2;
+        }
+
+        var diff = ghostTargetPosition - transform.position;
+
+        var dir = diff.normalized
+            + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+
         transform.position += dir.normalized * speed * Time.deltaTime;
     }
 
@@ -55,7 +78,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Rebirth() {
-        speed *= 1.5f/20f;
+        speed *= 1.5f;
         speed = Mathf.Clamp(speed, 1, 2.5f);
         isGhost = false;
         ChangeOpacity(1f);
@@ -95,14 +118,11 @@ public class Enemy : MonoBehaviour
         SoundManager.PlaySound("enemyDie");
 
         // Get randomized position next to the enemy
-        targetPosition = new Vector3(
+        ghostTargetPosition = new Vector3(
                 getOtherPlayer().transform.position.x * Random.Range(0.3f, 0.9f),
                 Random.Range(-6f, 6f),
                 transform.position.z
             );
-
-        speed *= 20f;
-        speed = Mathf.Clamp(speed, 1, 20f);
     }
 
     void OnTriggerEnter2D(Collider2D col)
