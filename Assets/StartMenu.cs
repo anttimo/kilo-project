@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 public class StartMenu : MonoBehaviour {
-    public static StartMenu instance = null;
 
     void Awake()
     {
