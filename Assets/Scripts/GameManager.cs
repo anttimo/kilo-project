@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     private bool readyForNewGame = true;
 
+    public GameObject startMenu;
+
 
     //Awake is always called before any Start functions
     void Awake()
@@ -40,13 +42,13 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
         InitGame();
     }
 
@@ -62,23 +64,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetStartMenu(GameObject menu)
+    {
+        startMenu = menu;
+    }
     //Initializes the game for each level.
     void InitGame()
     {
         player1Origin = player1.transform.position;
         player2Origin = player2.transform.position;
+        if (startMenu)
+        {
+            startMenu.SetActive(true);
+        }
     }
     IEnumerator StartGame()
     {
         GameObject.Find("MiddlePillar").GetComponent<Animator>().SetBool("gameStart", true);
-
-        // Never do it like this, horrible.
-        GameObject logo = GameObject.Find("GameLogo");
-        GameObject st = GameObject.Find("StartText");
-        GameObject bg = GameObject.Find("DarkenBG");
-        if (logo) logo.SetActive(false);
-        if (st) st.SetActive(false);
-        if (bg) bg.SetActive(false);
+        if (startMenu) {
+            startMenu.SetActive(false);
+        }
         yield return new WaitForSecondsRealtime(1);
         moveCameras = true;
         paused = false;
