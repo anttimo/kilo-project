@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private bool isGhost = false;
 
     private Collider2D enemyCollider;
-    private float ghostSpeed = 20f;
+    private float ghostSpeed = 30f;
 
 
     void Start()
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
         pSystem.Play();
         isGhost = true;
         enemyCollider.enabled = false;
-        ChangeOpacity(0.3f);
+        ChangeOpacity(0.2f);
         SoundManager.PlaySound("enemyDie");
 
         // Get randomized position next to the enemy
